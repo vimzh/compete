@@ -1,7 +1,7 @@
 # Palette & Token Spine
 
 **Surface:** Compete — Pinterest for outfits
-**Mood:** light cream, editorial, premium, quiet
+**Mood:** neutral cream, editorial, premium, quiet
 **Status:** proposed — nothing consumed by the app yet beyond `theme.js`
 
 ---
@@ -9,23 +9,23 @@
 ## The thesis
 
 This is a photo app. Every screen is dominated by try-on renders, garment cards, and
-outfit grids — user-generated imagery in every color there is. The interface's job is to
-disappear behind that.
+outfit grids — user imagery in every color there is. The interface's job is to disappear
+behind that.
 
-So the palette is built on one rule: **the chrome is near-achromatic, the photos carry all
-the color.** One accent, used sparingly, at a handful of intentional placements.
+So the palette is **near-monochrome: warm cream and ink, and essentially nothing else.**
+There is no brand accent color. Hierarchy comes from contrast, fill, and weight — not hue.
 
 Cream specifically — rather than a cool gray — for two reasons:
 
-1. **Skin tones.** A cool gray-blue canvas casts every try-on render slightly sallow.
-   A warm cream sits behind skin without fighting it. In an app whose whole payoff is
-   *you* wearing something, that matters more than it would elsewhere.
+1. **Skin tones.** A cool gray-blue canvas casts every try-on render slightly sallow. Warm
+   cream sits behind skin without fighting it. In an app whose payoff is *you* wearing
+   something, that matters more than it would elsewhere.
 2. **Premium reads warm.** Pure `#FFFFFF` reads as "unstyled default." Cream reads as a
    deliberate choice — gallery wall, not blank canvas.
 
 **The one exception:** photo wells stay pure white in *both* light and dark themes. A
-garment shot on a cream ground picks up a warm cast and the color is a lie. Since users
-may buy based on what they see, the try-on surface is a lightbox — white, always.
+garment shot on a cream ground picks up a warm cast and the color is a lie. Since users may
+buy based on what they see, the try-on surface is a lightbox — white, always.
 
 ---
 
@@ -33,58 +33,48 @@ may buy based on what they see, the try-on surface is a lightbox — white, alwa
 
 Named for **values**, never roles. Nothing in the app should reference these directly.
 
-### Sand (warm neutral ramp)
+### Sand (warm neutral ramp) — the whole palette
 
 | Token | Hex | |
 |---|---|---|
-| `sand.50`  | `#FDFBF7` | |
-| `sand.100` | `#FAF6EF` | canvas |
-| `sand.200` | `#F2ECE1` | |
-| `sand.300` | `#E7DFD1` | |
-| `sand.400` | `#D3C8B6` | |
-| `sand.500` | `#B0A492` | |
-| `sand.600` | `#8A8073` | |
-| `sand.700` | `#5C5348` | |
-| `sand.800` | `#403A31` | |
-| `sand.900` | `#1F1B15` | ink |
-| `sand.950` | `#14120E` | dark canvas |
+| `sand.50`  | `#FDFCF9` | |
+| `sand.100` | `#FAF7F1` | canvas |
+| `sand.200` | `#F3EFE7` | |
+| `sand.300` | `#E8E3D9` | |
+| `sand.400` | `#D6CFC2` | |
+| `sand.500` | `#B5AD9F` | |
+| `sand.600` | `#8C8477` | |
+| `sand.700` | `#5E574C` | |
+| `sand.800` | `#423C33` | |
+| `sand.900` | `#211E18` | ink |
+| `sand.950` | `#15130F` | dark canvas |
 
-### Clay (accent ramp)
+Warm but greige — pulled off pure yellow so it reads as paper, not custard.
 
-Terracotta. Warm enough to belong to the cream, saturated enough to be the only thing
-on screen competing with a photograph.
-
-| Token | Hex | |
-|---|---|---|
-| `clay.50`  | `#FBF0EB` | |
-| `clay.100` | `#F5DDD2` | |
-| `clay.300` | `#E0A288` | |
-| `clay.400` | `#D98B6A` | dark-mode accent |
-| `clay.500` | `#C4653F` | **primary accent** |
-| `clay.600` | `#A8512F` | |
-| `clay.700` | `#853E23` | accent text |
-
-### Gold (Outfit of the Day only)
+### Bronze (Outfit of the Day only)
 
 | Token | Hex | |
 |---|---|---|
-| `gold.100` | `#F7EAD1` | |
-| `gold.400` | `#D9AE62` | |
-| `gold.500` | `#C08F3C` | |
+| `bronze.100` | `#EFE7D6` | |
+| `bronze.400` | `#B99F6E` | |
+| `bronze.500` | `#967C4E` | |
 
-Reserved. Gold appears **only** on the OOTD badge and winner treatment — if it shows up
-anywhere else it stops meaning "won."
+Muted, not gold-leaf. Reserved — this is the **only** decorative chroma in the app, and it
+appears exclusively on the OOTD badge and winner treatment. If it shows up anywhere else it
+stops meaning "won."
 
-### Status
+### Status — the only other chroma
 
 | Token | Hex |
 |---|---|
-| `sage.500` (success) | `#5E7A52` |
-| `amber.500` (warning) | `#B8892F` |
-| `rust.500` (error) | `#A93B32` |
-| `slate.500` (info) | `#4A6C7A` |
+| `olive.500` (success) | `#5F6E56` |
+| `ochre.500` (warning) | `#9A7B3F` |
+| `brick.500` (error) | `#8F4A42` |
+| `slate.500` (info) | `#55656B` |
 
-All desaturated to sit inside the warm world rather than puncture it.
+Heavily desaturated to sit inside the neutral world. They're legible and distinct from each
+other, but they never read as "brand color" — which is the point. In a palette this quiet,
+a status color carries real weight because it's the only thing on screen with hue.
 
 ---
 
@@ -96,55 +86,78 @@ Named for **roles**. This is what components consume.
 
 | Role | Light | Dark |
 |---|---|---|
-| `surface.canvas` | `#FAF6EF` | `#14120E` |
-| `surface.raised` | `#FFFFFF` | `#1D1A15` |
-| `surface.overlay` | `#FFFFFF` | `#262219` |
-| `surface.sunken` | `#F2ECE1` | `#0E0C09` |
-| `surface.inverse` | `#1F1B15` | `#FAF6EF` |
+| `surface.canvas` | `#FAF7F1` | `#15130F` |
+| `surface.raised` | `#FFFFFF` | `#1E1B16` |
+| `surface.overlay` | `#FFFFFF` | `#27231C` |
+| `surface.sunken` | `#F3EFE7` | `#0E0C09` |
+| `surface.inverse` | `#211E18` | `#FAF7F1` |
 | `surface.photo` | `#FFFFFF` | `#FFFFFF` |
 
-`surface.photo` not switching is deliberate — see the thesis above.
+`surface.photo` not switching is deliberate — see the thesis.
 
 ### Text
 
 | Role | Light | Dark | Contrast on canvas |
 |---|---|---|---|
-| `text.primary` | `#1F1B15` | `#F2ECE1` | ~15:1 ✅ |
-| `text.secondary` | `#5C5348` | `#B5AC9C` | ~7:1 ✅ AA all sizes |
-| `text.muted` | `#8A8073` | `#857C6D` | ~3.6:1 ⚠️ |
-| `text.onAccent` | `#FFFFFF` | `#14120E` | |
-| `text.accent` | `#853E23` | `#E0A288` | ~7:1 ✅ |
+| `text.primary` | `#211E18` | `#F3EFE7` | ~15:1 ✅ |
+| `text.secondary` | `#5E574C` | `#B7AF9F` | ~7:1 ✅ AA all sizes |
+| `text.muted` | `#8C8477` | `#877F70` | ~3.5:1 ⚠️ |
+| `text.onAccent` | `#FDFCF9` | `#15130F` | |
 
 ⚠️ **`text.muted` fails AA for body copy.** It's for ≥18px text or genuinely non-essential
-metadata (timestamps, counts). Anything a user needs to read is `text.secondary` or darker.
-
-⚠️ **Never set text in `clay.500`.** The accent at `#C4653F` on cream is ~3.4:1 — it fails.
-That's what `text.accent` (`clay.700`) exists for. The accent is a *fill* color, not a
-text color.
+metadata (timestamps, like counts). Anything a user needs to read is `text.secondary` or darker.
 
 ### Border
 
 | Role | Light | Dark |
 |---|---|---|
-| `border.subtle` | `#EDE6DA` | `#2A251D` |
-| `border.default` | `#E0D8C9` | `#363028` |
-| `border.strong` | `#C9BFAC` | `#4A4237` |
+| `border.subtle` | `#EFEAE0` | `#2B261E` |
+| `border.default` | `#E4DED2` | `#373127` |
+| `border.strong` | `#CFC7B8` | `#4B4438` |
 
 On cream, prefer hairline borders over shadows for separation. Shadows on a warm ground
 muddy fast.
 
-### Accent
+### Accent — ink, not a color
 
 | Role | Light | Dark |
 |---|---|---|
-| `accent.default` | `#C4653F` | `#D98B6A` |
-| `accent.hover` | `#A8512F` | `#E0A288` |
-| `accent.subtle` | `#FBF0EB` | `#2E2019` |
-| `accent.border` | `#E0A288` | `#5C3A29` |
+| `accent.default` | `#211E18` | `#F3EFE7` |
+| `accent.hover` | `#423C33` | `#FFFFFF` |
+| `accent.subtle` | `#F3EFE7` | `#27231C` |
+| `accent.border` | `#D6CFC2` | `#4B4438` |
 
-**The accent budget: 3–5 placements per screen, maximum.** Primary CTA, the like state
-when active, and the selected-variant indicator. That's the list. Everything else is
-neutral.
+The primary action is an **ink button on cream** — and in dark mode it inverts to a cream
+button on ink. This is the Aesop/COS move, and it's the single biggest reason the palette
+reads premium rather than default.
+
+### OOTD
+
+| Role | Light | Dark |
+|---|---|---|
+| `ootd.default` | `#967C4E` | `#B99F6E` |
+| `ootd.subtle` | `#EFE7D6` | `#2C2517` |
+| `ootd.border` | `#B99F6E` | `#5A4C2C` |
+
+---
+
+## What replaces the accent color
+
+Removing hue means **state has to be carried by fill and weight instead.** This is a
+constraint, not an oversight — design around it deliberately:
+
+| State | Signal |
+|---|---|
+| Like — inactive | Outline heart, `text.muted` |
+| Like — active | **Filled** heart, `text.primary` |
+| Selected variant | 2px `border.strong` ring + `surface.raised` lift |
+| Primary action | Solid ink fill |
+| Secondary action | Hairline border, transparent fill |
+| Disabled | `surface.sunken` fill, `text.muted` label |
+
+If a state ever feels ambiguous, the fix is **more contrast or more fill weight** — not
+reintroducing a hue. The moment a second color enters, the photos stop being the loudest
+thing on screen and the whole premise weakens.
 
 ---
 
@@ -152,12 +165,12 @@ neutral.
 
 Dark is not an inversion. Specifically:
 
-- `surface.canvas` is `#14120E`, a **warm-tinted near-black** — never `#000000`. Pure black
+- `surface.canvas` is `#15130F`, a **warm-tinted near-black** — never `#000000`. Pure black
   against warm photography looks like a rendering bug.
-- Accent chroma drops: `clay.500` → `clay.400`. Full-saturation terracotta on near-black
-  vibrates.
+- The accent genuinely flips: ink-on-cream becomes cream-on-ink.
 - **Shadows are replaced by border rings.** Elevation via shadow doesn't read on dark
   ground; `border.default` at 1px does the same job.
+- Status colors lighten slightly to hold contrast against the dark canvas.
 - Photo wells stay white — the lightbox rule holds in both themes.
 
 ---
@@ -170,19 +183,18 @@ Dark is not an inversion. Specifically:
 ### Type scale — ~1.2 ratio
 `12, 13, 15, 17, 20, 24, 30, 36`
 
-Body 15/17. System font (SF Pro / Roboto) for UI — it's the right call for a mobile app
-and costs nothing. If we want editorial weight later, a serif at `display` sizes only
-(30/36) on the OOTD winner card and nowhere else.
+Body 15/17. System font (SF Pro / Roboto) for UI. In a palette with no color, **typography
+carries more of the hierarchy than usual** — be deliberate about weight steps (400/500/600)
+and don't rely on size alone.
 
 ### Radii
 `0, 4, 8, 12, 16, 24, 999`
 
-Cards at 16, buttons at 12, avatars/pills at 999. Garment thumbnails at 12 — soft, but not
-so round the clothes get cropped oddly.
+Cards at 16, buttons at 12, avatars/pills at 999. Garment thumbnails at 12.
 
 ### Shadows — warm-tinted, two-layer
 
-Shadow color is `rgba(31, 27, 21, α)` — **never** `rgba(0,0,0,α)`. A black shadow on cream
+Shadow color is `rgba(33, 30, 24, α)` — **never** `rgba(0,0,0,α)`. A black shadow on cream
 reads as grime; a warm one reads as depth. Two layers (tight key + soft ambient).
 
 React Native needs both `shadow*` (iOS) and `elevation` (Android) — see `theme.js`.
@@ -198,9 +210,11 @@ React Native needs both `shadow*` (iOS) and `elevation` (Android) — see `theme
 ## Notes & gaps
 
 - **OKLCH isn't available.** React Native's color parser accepts hex/rgb/hsl only, so these
-  are sRGB hex. The ramps were still spaced perceptually rather than by even hex steps.
+  are sRGB hex. The ramp was still spaced perceptually rather than by even hex steps.
 - **Component tokens (layer 3) are deliberately not defined yet** — no components exist to
-  derive them from. They should be added when the outfit card and vote button are built,
-  not speculatively.
-- Contrast figures above are computed against `surface.canvas`. Re-check anything that
-  lands on `surface.sunken`.
+  derive them from. Add them when the outfit card and vote button are built.
+- Contrast figures are computed against `surface.canvas`. Re-check anything landing on
+  `surface.sunken`.
+- **The risk of a monochrome palette is flatness.** The mitigation is surface separation
+  (white cards on cream canvas) and disciplined type weight — not color. If screens start
+  looking muddy, add contrast between surface levels before adding hue.

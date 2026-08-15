@@ -2,8 +2,10 @@
  * Design tokens for Compete.
  *
  * Three layers: primitives (values) -> semantics (roles) -> component tokens.
- * Components should only ever read from `semantic` / the `useTheme`-style helpers.
- * See docs/palette.md for the reasoning.
+ * Components should only ever read from the semantic layer.
+ *
+ * The palette is near-monochrome by design: warm cream and ink, no brand accent
+ * color. State is carried by fill and weight, never hue. See docs/palette.md.
  */
 
 // ─────────────────────────────────────────────────────────────
@@ -11,45 +13,46 @@
 // ─────────────────────────────────────────────────────────────
 
 const sand = {
-  50: '#FDFBF7',
-  100: '#FAF6EF',
-  200: '#F2ECE1',
-  300: '#E7DFD1',
-  400: '#D3C8B6',
-  500: '#B0A492',
-  600: '#8A8073',
-  700: '#5C5348',
-  800: '#403A31',
-  900: '#1F1B15',
-  950: '#14120E',
+  50: '#FDFCF9',
+  100: '#FAF7F1',
+  200: '#F3EFE7',
+  300: '#E8E3D9',
+  400: '#D6CFC2',
+  500: '#B5AD9F',
+  600: '#8C8477',
+  700: '#5E574C',
+  800: '#423C33',
+  900: '#211E18',
+  950: '#15130F',
 };
 
-const clay = {
-  50: '#FBF0EB',
-  100: '#F5DDD2',
-  300: '#E0A288',
-  400: '#D98B6A',
-  500: '#C4653F',
-  600: '#A8512F',
-  700: '#853E23',
+// Reserved for Outfit of the Day. The only decorative chroma in the app —
+// if it appears anywhere else it stops meaning "won".
+const bronze = {
+  100: '#EFE7D6',
+  400: '#B99F6E',
+  500: '#967C4E',
 };
 
-const gold = {
-  100: '#F7EAD1',
-  400: '#D9AE62',
-  500: '#C08F3C',
-};
-
+// Desaturated to sit inside the neutral world. In a palette this quiet, a
+// status color carries real weight because it's the only thing with hue.
 const status = {
-  sage: '#5E7A52',
-  amber: '#B8892F',
-  rust: '#A93B32',
-  slate: '#4A6C7A',
+  olive: '#5F6E56', // success
+  ochre: '#9A7B3F', // warning
+  brick: '#8F4A42', // error
+  slate: '#55656B', // info
 };
 
-// Shadows are tinted with the ink, never pure black — on a cream ground a black
-// shadow reads as grime rather than depth.
-const SHADOW_TINT = '31, 27, 21';
+const statusDark = {
+  olive: '#7E8F73',
+  ochre: '#BE9C57',
+  brick: '#B0655C',
+  slate: '#72858C',
+};
+
+// Shadows are tinted with the ink, never pure black — on a cream ground a
+// black shadow reads as grime rather than depth.
+const SHADOW_TINT = '33, 30, 24';
 
 // ─────────────────────────────────────────────────────────────
 // Layer 2 — Semantics. Named for roles. This is the public API.
@@ -69,25 +72,25 @@ const light = {
   text: {
     primary: sand[900],
     secondary: sand[700],
-    muted: sand[600], // ~3.6:1 — >=18px or non-essential metadata only
-    onAccent: '#FFFFFF',
-    accent: clay[700], // accent is a fill color; this is its text counterpart
+    muted: sand[600], // ~3.5:1 — >=18px or non-essential metadata only
+    onAccent: sand[50],
   },
   border: {
-    subtle: '#EDE6DA',
-    default: '#E0D8C9',
-    strong: '#C9BFAC',
+    subtle: '#EFEAE0',
+    default: '#E4DED2',
+    strong: '#CFC7B8',
   },
+  // The accent is ink, not a color. Primary action = ink button on cream.
   accent: {
-    default: clay[500],
-    hover: clay[600],
-    subtle: clay[50],
-    border: clay[300],
+    default: sand[900],
+    hover: sand[800],
+    subtle: sand[200],
+    border: sand[400],
   },
   ootd: {
-    default: gold[500],
-    subtle: gold[100],
-    border: gold[400],
+    default: bronze[500],
+    subtle: bronze[100],
+    border: bronze[400],
   },
   status,
 };
@@ -95,36 +98,36 @@ const light = {
 const dark = {
   surface: {
     canvas: sand[950], // warm-tinted near-black, never #000
-    raised: '#1D1A15',
-    overlay: '#262219',
+    raised: '#1E1B16',
+    overlay: '#27231C',
     sunken: '#0E0C09',
     inverse: sand[100],
     photo: '#FFFFFF',
   },
   text: {
     primary: sand[200],
-    secondary: '#B5AC9C',
-    muted: '#857C6D',
+    secondary: '#B7AF9F',
+    muted: '#877F70',
     onAccent: sand[950],
-    accent: clay[300],
   },
   border: {
-    subtle: '#2A251D',
-    default: '#363028',
-    strong: '#4A4237',
+    subtle: '#2B261E',
+    default: '#373127',
+    strong: '#4B4438',
   },
+  // Inverts: cream button on ink.
   accent: {
-    default: clay[400], // chroma reduced — full terracotta vibrates on near-black
-    hover: clay[300],
-    subtle: '#2E2019',
-    border: '#5C3A29',
+    default: sand[200],
+    hover: '#FFFFFF',
+    subtle: '#27231C',
+    border: '#4B4438',
   },
   ootd: {
-    default: gold[400],
-    subtle: '#2E2415',
-    border: '#5C4A28',
+    default: bronze[400],
+    subtle: '#2C2517',
+    border: '#5A4C2C',
   },
-  status,
+  status: statusDark,
 };
 
 // ─────────────────────────────────────────────────────────────
@@ -157,6 +160,7 @@ const fontSize = {
   hero: 36,
 };
 
+// With no accent color, type weight carries more hierarchy than usual.
 const fontWeight = {
   regular: '400',
   medium: '500',
@@ -225,7 +229,7 @@ const elevation = {
   },
 };
 
-export const primitives = { sand, clay, gold, status };
+export const primitives = { sand, bronze, status };
 export const themes = { light, dark };
 
 export const theme = {
