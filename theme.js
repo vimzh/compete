@@ -1,5 +1,5 @@
 /**
- * Design tokens for Compete.
+ * Design tokens for fitterest.
  *
  * Three layers: primitives (values) -> semantics (roles) -> component tokens.
  * Components should only ever read from the semantic layer.
@@ -163,23 +163,17 @@ const fontSize = {
   hero: 36,
 };
 
-/**
- * Custom faces. React Native picks weights by family name, not fontWeight, so
- * each weight is its own entry. Jost is a geometric grotesk in the Futura
- * lineage — the fashion-house default — and is reserved for brand moments
- * (wordmark, avatar initial). Body copy stays on the system font.
- */
+/** Custom faces. */
 const font = {
-  brand: 'Jost_500Medium',
-  brandLight: 'Jost_300Light',
-};
-
-// With no accent color, type weight carries more hierarchy than usual.
-const fontWeight = {
-  regular: '400',
-  medium: '500',
-  semibold: '600',
-  bold: '700',
+  // Display face, wordmark only. NOTE: Transcity is a DEMO release licensed for
+  // personal use — commercial use needs a licence from dharmasstudio.com.
+  wordmark: 'Transcity',
+  // UI face. React Native resolves weights by family name, not fontWeight, so
+  // each weight is its own entry — setting fontWeight on these does nothing.
+  regular: 'Manrope_400Regular',
+  medium: 'Manrope_500Medium',
+  semibold: 'Manrope_600SemiBold',
+  bold: 'Manrope_700Bold',
 };
 
 const lineHeight = {
@@ -254,7 +248,6 @@ export const theme = {
   space,
   font,
   fontSize,
-  fontWeight,
   lineHeight,
   radius,
   duration,

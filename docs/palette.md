@@ -1,6 +1,6 @@
 # Palette & Token Spine
 
-**Surface:** Compete — Pinterest for outfits
+**Surface:** fitterest — Pinterest for outfits
 **Mood:** neutral cream, editorial, premium, quiet
 **Status:** proposed — nothing consumed by the app yet beyond `theme.js`
 

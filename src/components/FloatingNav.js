@@ -36,8 +36,10 @@ export default function FloatingNav({ active, onChange, onAdd }) {
 
   return (
     <View
-      style={[styles.cluster, { bottom: Math.max(insets.bottom, theme.space[3]) + theme.space[3] }]}
-      pointerEvents="box-none"
+      style={[
+        styles.cluster,
+        { bottom: Math.max(insets.bottom, theme.space[3]) + theme.space[3] },
+      ]}
     >
       <NavButton
         Icon={House}
@@ -64,6 +66,8 @@ export default function FloatingNav({ active, onChange, onAdd }) {
 const styles = StyleSheet.create({
   cluster: {
     position: 'absolute',
+    // Lets taps fall through the gaps between the boxes to the feed behind.
+    pointerEvents: 'box-none',
     left: 0,
     right: 0,
     flexDirection: 'row',

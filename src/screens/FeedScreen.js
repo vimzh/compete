@@ -1,38 +1,38 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import theme from '../../theme';
 import Screen from '../components/Screen';
+import MasonryGrid from '../components/MasonryGrid';
+import useMockLoad from '../hooks/useMockLoad';
+import LOOKS from '../data/mockLooks';
+import { useCloset } from '../state/ClosetContext';
 
 export default function FeedScreen({ onSearch, onProfile }) {
+  const loading = useMockLoad();
+  const { outfits } = useCloset();
+  // Freshly posted fits lead the feed.
+  const feed = [...outfits, ...LOOKS];
+
   return (
     <Screen onSearch={onSearch} onProfile={onProfile}>
-      <View style={styles.empty}>
-        <Text style={styles.headline}>No looks yet</Text>
-        <Text style={styles.body}>
-          Share a link from anywhere to start building an outfit.
-        </Text>
-      </View>
+      {({ onScroll, scrollEventThrottle, paddingTop }) => (
+        <ScrollView
+          contentContainerStyle={[styles.content, { paddingTop }]}
+          showsVerticalScrollIndicator={false}
+          onScroll={onScroll}
+          scrollEventThrottle={scrollEventThrottle}
+        >
+          <MasonryGrid looks={feed} loading={loading} />
+        </ScrollView>
+      )}
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  empty: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: theme.space[8],
-    gap: theme.space[2],
-  },
-  headline: {
-    fontSize: theme.fontSize.lg,
-    fontWeight: theme.fontWeight.medium,
-    color: theme.text.primary,
-  },
-  body: {
-    fontSize: theme.fontSize.base,
-    lineHeight: theme.fontSize.base * theme.lineHeight.normal,
-    color: theme.text.secondary,
-    textAlign: 'center',
+  content: {
+    paddingHorizontal: theme.space[3],
+    // Clears the floating nav cluster, which sits over the content.
+    paddingBottom: theme.space[16] + theme.space[10],
   },
 });

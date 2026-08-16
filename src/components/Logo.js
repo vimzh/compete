@@ -4,22 +4,22 @@ import theme from '../../theme';
 
 /**
  * Wordmark. No icon by design — fashion houses brand with letterforms, not
- * symbols (COS, ARKET, Aesop). Jost is a Futura-lineage geometric; wide
- * tracking at a light weight is what separates an editorial masthead from
- * a startup logo.
+ * symbols (COS, ARKET, Aesop).
  */
-export default function Logo({ color = theme.text.primary }) {
+export default function Logo({ color = theme.text.primary, size = theme.fontSize.xl }) {
   return (
-    <Text style={[styles.wordmark, { color }]} accessibilityRole="header">
-      COMPETE
+    <Text
+      style={[styles.wordmark, { color, fontSize: size }]}
+      accessibilityRole="header"
+    >
+      fitterest
     </Text>
   );
 }
 
 const styles = StyleSheet.create({
   wordmark: {
-    fontFamily: theme.font.brand,
-    fontSize: theme.fontSize.md,
-    letterSpacing: 5,
+    fontFamily: theme.font.wordmark,
+    letterSpacing: 0.5,
   },
 });

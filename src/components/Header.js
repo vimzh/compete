@@ -5,9 +5,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import theme from '../../theme';
 import Avatar from './Avatar';
 import Logo from './Logo';
+import { useAuth } from '../state/AuthContext';
 
 export default function Header({ onSearch, onProfile }) {
   const insets = useSafeAreaInsets();
+  const { user } = useAuth();
 
   return (
     <View style={[styles.header, { paddingTop: insets.top + theme.space[3] }]}>
@@ -29,7 +31,7 @@ export default function Header({ onSearch, onProfile }) {
           accessibilityLabel="Profile"
           style={styles.iconButton}
         >
-          <Avatar />
+          <Avatar name={user?.name} uri={user?.avatarUrl} />
         </Pressable>
       </View>
     </View>

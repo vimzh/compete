@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { ArrowLeft, Search, X } from 'lucide-react-native';
+import { Search, X } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import theme from '../../theme';
@@ -13,15 +13,6 @@ export default function SearchScreen({ onClose }) {
   return (
     <View style={styles.screen}>
       <View style={[styles.header, { paddingTop: insets.top + theme.space[3] }]}>
-        <Pressable
-          onPress={onClose}
-          accessibilityRole="button"
-          accessibilityLabel="Close search"
-          style={styles.back}
-        >
-          <ArrowLeft size={22} color={theme.text.primary} strokeWidth={1.75} />
-        </Pressable>
-
         <View style={styles.field}>
           <Search size={18} color={theme.text.muted} strokeWidth={1.75} />
           <TextInput
@@ -47,12 +38,21 @@ export default function SearchScreen({ onClose }) {
             </Pressable>
           )}
         </View>
+
+        <Pressable
+          onPress={onClose}
+          accessibilityRole="button"
+          accessibilityLabel="Close search"
+          hitSlop={theme.space[2]}
+        >
+          <Text style={styles.cancel}>Cancel</Text>
+        </Pressable>
       </View>
 
       <View style={styles.body}>
         {trimmed.length === 0 ? (
           <>
-            <Text style={styles.headline}>Search Compete</Text>
+            <Text style={styles.headline}>Search fitterest</Text>
             <Text style={styles.copy}>
               Find looks by piece, brand, or the person who put them together.
             </Text>
@@ -76,15 +76,15 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: theme.space[2],
-    paddingHorizontal: theme.space[3],
+    gap: theme.space[3],
+    // Matches the main header's gutter so the field is evenly inset on both
+    // sides — a leading back button pushed it visibly off-centre.
+    paddingHorizontal: theme.space[4],
     paddingBottom: theme.space[3],
   },
-  back: {
-    width: theme.hitSlop,
-    height: theme.hitSlop,
-    alignItems: 'center',
-    justifyContent: 'center',
+  cancel: {
+    fontSize: theme.fontSize.base,
+    color: theme.text.secondary,
   },
   // Hairline border, no shadow — see CLAUDE.md.
   field: {
@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: theme.fontSize.base,
+    fontFamily: theme.font.regular,
     color: theme.text.primary,
     // RNW draws a focus ring on the input itself; the field already shows focus.
     outlineStyle: 'none',
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
   },
   headline: {
     fontSize: theme.fontSize.lg,
-    fontWeight: theme.fontWeight.medium,
+    fontFamily: theme.font.medium,
     color: theme.text.primary,
   },
   copy: {

@@ -39,3 +39,10 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# server secrets
+server/.env
+server/node_modules/
+
+# server user store (accounts + sessions live here in dev)
+server/data/
